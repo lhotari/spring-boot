@@ -32,6 +32,7 @@ import org.springframework.boot.actuate.endpoint.mvc.EndpointHandlerMappingCusto
 import org.springframework.boot.actuate.endpoint.mvc.EnvironmentMvcEndpoint;
 import org.springframework.boot.actuate.endpoint.mvc.HealthMvcEndpoint;
 import org.springframework.boot.actuate.endpoint.mvc.HeapdumpMvcEndpoint;
+import org.springframework.boot.actuate.endpoint.mvc.JvmDiagnosticsMvcEndpoint;
 import org.springframework.boot.actuate.endpoint.mvc.LogFileMvcEndpoint;
 import org.springframework.boot.actuate.endpoint.mvc.MetricsMvcEndpoint;
 import org.springframework.boot.actuate.endpoint.mvc.MvcEndpoint;
@@ -137,6 +138,13 @@ public class EndpointWebMvcManagementContextConfiguration {
 	@ConditionalOnEnabledEndpoint("heapdump")
 	public HeapdumpMvcEndpoint heapdumpMvcEndpoint() {
 		return new HeapdumpMvcEndpoint();
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	@ConditionalOnEnabledEndpoint("jvmdiagnostics")
+	public JvmDiagnosticsMvcEndpoint jvmDiagnosticsMvcEndpoint() {
+		return new JvmDiagnosticsMvcEndpoint();
 	}
 
 	@Bean
